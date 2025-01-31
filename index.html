@@ -8,11 +8,11 @@
   </head>
   <body>
     <div class="container">
-      <div class="start-screen hide">
+      <div class="start-screen">
         <h1 class="heading">Quiz App</h1>
         <div class="settings">
           <label for="num-questions">Number of Questions</label>
-          <select name="questionNumber" id="numquestions">
+          <select name="questionNumber" id="num-questions">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
@@ -23,23 +23,23 @@
 
           <label for="category">Category</label>
           <select name="category" id="category">
-            <option value="any category">any category</option>
-            <option value="knowledge">general knowledge</option>
-            <option value="books">books</option>
-            <option value="films">films</option>
-            <option value="music">music</option>
-            <option value="television">television</option>
-            <option value="video games">video games</option>
-            <option value="board games">board games</option>
-            <option value="science and nature">science and nature</option>
-            <option value="computers">computers</option>
-            <option value="mathematics">mathematics</option>
-            <option value="sports">sports</option>
-            <option value="geography">geography</option>
-            <option value="history">history</option>
-            <option value="arts">arts</option>
-            <option value="politics">politics</option>
-            <option value="cars">cars</option>
+            <option value="any">Any Category</option>
+            <option value="9">General Knowledge</option>
+            <option value="10">Books</option>
+            <option value="11">Film</option>
+            <option value="12">Music</option>
+            <option value="14">Television</option>
+            <option value="15">Video Games</option>
+            <option value="16">Board Games</option>
+            <option value="17">Science & Nature</option>
+            <option value="18">Science: Computers</option>
+            <option value="19">Science: Mathematics</option>
+            <option value="21">Sports</option>
+            <option value="22">Geography</option>
+            <option value="23">History</option>
+            <option value="25">Art</option>
+            <option value="24">Politics</option>
+            <option value="28">Vehicles</option>
           </select>
 
           <label for="num-questions">Select Difficulty</label>
@@ -67,7 +67,7 @@
         <div class="timer">
           <div class="progress">
             <div class="progress-bar"></div>
-            <span class="progress-text">50</span>
+            <span class="progress-text"></span>
           </div>
         </div>
 
@@ -81,7 +81,7 @@
         </div>
 
         <div class="answer-wrapper">
-          <div class="answer selected">
+          <!-- <div class="answer selected">
             <span class="text">answer</span>
             <span class="checkbox">
               <span class="icon">✓</span>
@@ -100,14 +100,14 @@
             <span class="checkbox">
               <span class="icon">✓</span>
             </span>
-          </div>
+          </div> -->
         </div>
 
         <button class="btn submit" disabled>Submit</button>
         <button class="btn next">Next</button>
       </div>
 
-      <div class="end-screen">
+      <div class="end-screen hide">
         <h1 class="heading">Quiz App</h1>
         <div class="score">
           <span class="score-text">Your Score:</span>
@@ -115,9 +115,8 @@
             <span class="final-score">0</span>
             <span class="total-score">/10</span>
           </div>
+          <button class="btn restart">Restart Quiz</button>
         </div>
-
-        <button class="btn restart">Restart Quiz</button>
       </div>
     </div>
     <script src="./app.js"></script>
