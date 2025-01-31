@@ -32,9 +32,9 @@ const startQuiz = () => {
     difficulty.value !== "any" ? `&difficulty=${difficulty.value}` : "";
   time = parseInt(timePerQuestion.value, 10) || 30;
 
-    // const url = `https://opentdb.com/api.php?amount=${num}${cat}${diff}&type=multiple`;
+    const url = `https://opentdb.com/api.php?amount=${num}${cat}${diff}&type=multiple`;
 
-    const url = ("https://opentdb.com/api_category.php");
+    // const url = ("https://opentdb.com/api_category.php");
     
 
   console.log("Fetching from:", url.category);
