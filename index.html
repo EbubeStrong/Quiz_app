@@ -1,13 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz App</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-    .
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="start-screen hide">
+        <h1 class="heading">Quiz App</h1>
+        <div class="settings">
+          <label for="num-questions">Number of Questions</label>
+          <select name="questionNumber" id="numquestions">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+          </select>
+
+          <label for="category">Category</label>
+          <select name="category" id="category">
+            <option value="any category">any category</option>
+            <option value="knowledge">general knowledge</option>
+            <option value="books">books</option>
+            <option value="films">films</option>
+            <option value="music">music</option>
+            <option value="television">television</option>
+            <option value="video games">video games</option>
+            <option value="board games">board games</option>
+            <option value="science and nature">science and nature</option>
+            <option value="computers">computers</option>
+            <option value="mathematics">mathematics</option>
+            <option value="sports">sports</option>
+            <option value="geography">geography</option>
+            <option value="history">history</option>
+            <option value="arts">arts</option>
+            <option value="politics">politics</option>
+            <option value="cars">cars</option>
+          </select>
+
+          <label for="num-questions">Select Difficulty</label>
+          <select name="difficulty" id="difficulty">
+            <option value="">any difficulty</option>
+            <option value="">ease</option>
+            <option value="">medium</option>
+            <option value="">hard</option>
+          </select>
+
+          <label for="time">Select time per question</label>
+          <select name="time" id="time">
+            <option value="10">10 seconds</option>
+            <option value="15">15 seconds</option>
+            <option value="20">20 seconds</option>
+            <option value="25">25 seconds</option>
+            <option value="30">30 seconds</option>
+            <option value="60">60 seconds</option>
+          </select>
+        </div>
+        <button class="btn start">Start quiz</button>
+      </div>
+
+      <div class="quiz">
+        <div class="timer">
+          <div class="progress">
+            <div class="progress-bar"></div>
+            <span class="progress-text">50</span>
+          </div>
+        </div>
+
+        <div class="question-wrapper">
+          <div class="number">
+            Question <span class="current">1</span
+            ><span class="total">/10</span>
+          </div>
+
+          <div class="question">This is a Question</div>
+        </div>
+
+        <div class="answer-wrapper">
+          <div class="answer selected">
+            <span class="text">answer</span>
+            <span class="checkbox">
+              <span class="icon"></span>
+            </span>
+          </div>
+
+          <div class="answer correct">
+            <span class="text">answer</span>
+            <span class="checkbox">
+              <span class="icon"></span>
+            </span>
+          </div>
+
+          <div class="answer wrong">
+            <span class="text">answer</span>
+            <span class="checkbox">
+              <span class="icon"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="./app.js"></script>
-</body>
+  </body>
 </html>
