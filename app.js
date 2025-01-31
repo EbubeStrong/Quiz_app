@@ -118,15 +118,92 @@ const showQuestion = (question) => {
 };
 
 const startTimer = (time) => {
-  clearInterval(timer); // Clear any existing timer
+  clearInterval(timer);
   let countdown = time;
 
   timer = setInterval(() => {
-    if (countdown > 0) {
+    if (countdown >= 0) {
       progress(countdown, time);
       countdown--;
     } else {
-      clearInterval(timer);
+      checkAnswer();
     }
   }, 1000);
 };
+
+submitBtn.addEventListener("click", () => checkAnswer());
+
+const checkAnswer = () => {
+  clearInterval(timer);
+
+  const selectedAnswer = document.querySelector(".answer.selected");
+
+  if (selectedAnswer) {
+    const answer = selectedAnswer.querySelector(".text");
+
+    if (
+      answer.textContent.trim() === questions[currentQuestion].correct_answer
+    ) {
+      score++;
+      selectedAnswer.classList.add("correct");
+    } else {
+      document.querySelectorAll(".answer").forEach((answer) => {
+        if (
+          answer.querySelector(".text").innerHTML ===
+          questions[currentQuestion].correct_answer
+        ) {
+          answer.classList.add("correct");
+        }
+        selectedAnswer.classList.add("wrong");
+      });
+    }
+  } else {
+    document.querySelectorAll(".answer").forEach((answer) => {
+      if (
+        answer.querySelector(".text").innerHTML ===
+        questions[currentQuestion].correct_answer
+      ) {
+        answer.classList.add("correct");
+      }
+    });
+  }
+
+  const answerDiv = document.querySelectorAll(".answer");
+  answerDiv.forEach((answer) => {
+    answer.classList.add("checked");
+  });
+
+  submitBtn.style.display = "none";
+  nextBtn.style.display = "block";
+};
+
+nextBtn.addEventListener("click", () => {
+  nextQuestion();
+  nextBtn.style.display = "none";
+  submitBtn.style.display = "block";
+});
+
+const nextQuestion = () => {
+  if (currentQuestion < questions.length - 1 ) {
+      currentQuestion++
+      showQuestion(questions[currentQuestion]);
+  } else {
+    showScore();
+  }
+};
+
+const endScore = document.querySelector(".end-screen"),
+  finalScore = document.querySelector(".final-score"),
+  totalScore = document.querySelector(".total-score");
+
+const showScore = () => {
+  endScore.classList.remove("hide");
+  quiz.classList.add("hide");
+  finalScore.innerHTML = score;
+  totalScore.innerHTML = `/${questions.length}`;
+};
+
+const restartBtn = document.querySelector(".restart")
+restartBtn.addEventListener('click', () => {
+    window.location.reload();
+})
