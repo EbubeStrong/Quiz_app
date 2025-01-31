@@ -32,9 +32,12 @@ const startQuiz = () => {
     difficulty.value !== "any" ? `&difficulty=${difficulty.value}` : "";
   time = parseInt(timePerQuestion.value, 10) || 30;
 
-  const url = `https://opentdb.com/api.php?amount=${num}${cat}${diff}&type=multiple`;
+    // const url = `https://opentdb.com/api.php?amount=${num}${cat}${diff}&type=multiple`;
 
-  console.log("Fetching from:", url);
+    const url = ("https://opentdb.com/api_category.php");
+    
+
+  console.log("Fetching from:", url.category);
 
   fetch(url)
     .then((res) => {
@@ -181,12 +184,14 @@ nextBtn.addEventListener("click", () => {
   nextQuestion();
   nextBtn.style.display = "none";
   submitBtn.style.display = "block";
+
+  if (submitBtn) submitBtn.disabled = true;
 });
 
 const nextQuestion = () => {
-  if (currentQuestion < questions.length - 1 ) {
-      currentQuestion++
-      showQuestion(questions[currentQuestion]);
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion(questions[currentQuestion]);
   } else {
     showScore();
   }
@@ -203,7 +208,7 @@ const showScore = () => {
   totalScore.innerHTML = `/${questions.length}`;
 };
 
-const restartBtn = document.querySelector(".restart")
-restartBtn.addEventListener('click', () => {
-    window.location.reload();
-})
+const restartBtn = document.querySelector(".restart");
+restartBtn.addEventListener("click", () => {
+  window.location.reload();
+});
