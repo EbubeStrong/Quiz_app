@@ -105,7 +105,8 @@ select{
     height: 100%;
     border-radius: 30px;
     overflow: hidden;
-    background: linear-gradient(to right, #ea517c, #b478f1);
+    /* background: linear-gradient(to right, #ea517c, #b478f1); */
+    background: linear-gradient(to right, rgb(8, 100, 238), rgb(15, 195, 240));
     transition: 1s linear;
 }
 .timer .progress .progress-text{
@@ -179,4 +180,37 @@ select{
 }
 .answer.wrong{
     border-color: #fc3939;
+}
+
+.question-wrapper,
+.answer-wrapper{
+    margin-bottom: 30px;
+}
+
+/* style for next button */
+.btn .next{
+    display: none;
+}
+
+/* style for end-screen */
+.end-screen .score{
+    color: #fff;
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+.end-screen .score-text{
+    color: #a2aace;
+    font-size: 16px;
+    margin-bottom: 120px;
+}
+
+@media(max-width: 468px){
+    .container{
+        min-height: 100vh;
+        max-width: 100%;
+        border-radius: 0;
+    }
 }
