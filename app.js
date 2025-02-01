@@ -1,9 +1,9 @@
 const startContainer = document.querySelector(".start_btn"),
-    quizButton = document.querySelector(".start_btn button"),
-    infoBox = document.querySelector(".info_box"),
-    exitBtn = document.querySelector(".exit"),
-    continueBtn = document.querySelector(".continue"),
-    selectContainer = document.querySelector(".container");
+  quizButton = document.querySelector(".start_btn button"),
+  infoBox = document.querySelector(".info_box"),
+  exitBtn = document.querySelector(".exit"),
+  continueBtn = document.querySelector(".continue"),
+  selectContainer = document.querySelector(".container");
 
 infoBox.classList.add("hide");
 selectContainer.classList.add("hide");
@@ -50,18 +50,17 @@ const startBtn = document.querySelector(".start"),
   submitBtn = document.querySelector(".submit"),
   nextBtn = document.querySelector(".next");
 
-// Start Quiz Function
 // Prevent Reload or Exit
 window.addEventListener("beforeunload", (event) => {
   event.preventDefault();
-  event.returnValue = "Are you sure you want to leave? Your progress will be lost.";
 });
 
 // Save progress in sessionStorage when quiz starts
 const startQuiz = () => {
   const num = numQuestions.value || 5;
   const cat = category.value !== "any" ? `&category=${category.value}` : "";
-  const diff = difficulty.value !== "any" ? `&difficulty=${difficulty.value}` : "";
+  const diff =
+    difficulty.value !== "any" ? `&difficulty=${difficulty.value}` : "";
   time = parseInt(timePerQuestion.value, 10) || 30;
 
   const url = `https://opentdb.com/api.php?amount=${num}${cat}${diff}&type=multiple`;
@@ -87,13 +86,12 @@ const startQuiz = () => {
       questions = data.results;
       console.log("Fetched Questions:", questions);
 
-      // Save quiz progress to session storage
       sessionStorage.setItem("quizStarted", "true");
 
       startScreen.classList.add("hide");
       quiz.classList.remove("hide");
 
-      currentQuestion = 0; // Ensure we start from the first question
+      currentQuestion = 0;
       showQuestion(questions[currentQuestion]);
     })
     .catch((error) => {
@@ -102,16 +100,10 @@ const startQuiz = () => {
     });
 };
 
-// Prevent user from going back to the start screen
-document.addEventListener("DOMContentLoaded", () => {
-  if (sessionStorage.getItem("quizStarted") === "true") {
-    startScreen.classList.add("hide");
-    quiz.classList.remove("hide");
-  }
-});
 
-startBtn.addEventListener("click", startQuiz);
-
+if (startBtn) {
+  startBtn.addEventListener("click", startQuiz);
+}
 
 const showQuestion = (question) => {
   const questionText = document.querySelector(".question"),
@@ -124,7 +116,6 @@ const showQuestion = (question) => {
     ...question.incorrect_answers,
     question.correct_answer.toString(),
   ];
-
   answers.sort(() => Math.random() - 0.5);
   answersWrapper.innerHTML = "";
 
@@ -137,13 +128,10 @@ const showQuestion = (question) => {
           </div>`;
   });
 
-  questionNumber.innerHTML = `
-    Question <span class="current">${
-      currentQuestion + 1
-    }</span><span class="total">/${questions.length}</span>
-  `;
+  questionNumber.innerHTML = `Question <span class="current">${
+    currentQuestion + 1
+  }</span><span class="total">/${questions.length}</span>`;
 
-  // Event listeners for answer selection
   const answersDiv = document.querySelectorAll(".answer");
   answersDiv.forEach((answer) => {
     answer.addEventListener("click", () => {
@@ -156,7 +144,6 @@ const showQuestion = (question) => {
     });
   });
 
-  // Start timer
   time = parseInt(timePerQuestion.value, 10) || 30;
   startTimer(time);
 };
@@ -175,7 +162,14 @@ const startTimer = (time) => {
   }, 1000);
 };
 
-submitBtn.addEventListener("click", () => checkAnswer());
+submitBtn.addEventListener("click", () => {
+  const selectedAnswer = document.querySelector(".answer.selected");
+  if (!selectedAnswer) {
+    alert("Please select an answer before submitting.");
+    return;
+  }
+  checkAnswer();
+});
 
 const checkAnswer = () => {
   clearInterval(timer);
@@ -212,10 +206,9 @@ const checkAnswer = () => {
     });
   }
 
-  const answerDiv = document.querySelectorAll(".answer");
-  answerDiv.forEach((answer) => {
-    answer.classList.add("checked");
-  });
+  document
+    .querySelectorAll(".answer")
+    .forEach((answer) => answer.classList.add("checked"));
 
   submitBtn.style.display = "none";
   nextBtn.style.display = "block";
@@ -235,6 +228,8 @@ const nextQuestion = () => {
     showQuestion(questions[currentQuestion]);
   } else {
     showScore();
+    nextBtn.style.display = "none";
+    submitBtn.style.display = "none";
   }
 };
 
@@ -249,16 +244,17 @@ const showScore = () => {
   totalScore.innerHTML = `/${questions.length}`;
 };
 
-const restartBtn = document.querySelector(".restart")
+const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", () => {
+  sessionStorage.removeItem("quizStarted");
   endScore.classList.add("hide");
   startContainer.classList.add("hide");
   infoBox.classList.add("hide");
   selectContainer.classList.remove("hide");
   startScreen.classList.remove("hide");
-})
+});
 
-const exitQuiz = document.querySelector(".btn.exit")
+const exitQuiz = document.querySelector(".btn.exit");
 exitQuiz.addEventListener("click", () => {
   window.location.reload();
 });
