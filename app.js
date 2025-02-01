@@ -1,3 +1,29 @@
+const startContainer = document.querySelector(".start_btn"),
+    quizButton = document.querySelector(".start_btn button"),
+    infoBox = document.querySelector(".info_box"),
+    exitBtn = document.querySelector(".exit"),
+    continueBtn = document.querySelector(".continue"),
+    selectContainer = document.querySelector(".container");
+
+infoBox.classList.add("hide");
+selectContainer.classList.add("hide");
+
+quizButton.addEventListener("click", () => {
+  startContainer.classList.add("hide");
+  infoBox.classList.remove("hide");
+});
+
+exitBtn.addEventListener("click", () => {
+  infoBox.classList.add("hide");
+  startContainer.classList.remove("hide");
+});
+
+continueBtn.addEventListener("click", () => {
+  infoBox.classList.add("hide");
+  startContainer.classList.add("hide");
+  selectContainer.classList.remove("hide");
+});
+
 // Script for Progress Bar
 const progressBar = document.querySelector(".progress-bar"),
   progressText = document.querySelector(".progress-text");
@@ -17,10 +43,10 @@ let questions = [],
 const startBtn = document.querySelector(".start"),
   numQuestions = document.querySelector("#num-questions"),
   category = document.querySelector("#category"),
+  startScreen = document.querySelector(".start-screen"),
   difficulty = document.querySelector("#difficulty"),
   timePerQuestion = document.querySelector("#time"),
   quiz = document.querySelector(".quiz"),
-  startScreen = document.querySelector(".start-screen"),
   submitBtn = document.querySelector(".submit"),
   nextBtn = document.querySelector(".next");
 
@@ -32,10 +58,9 @@ const startQuiz = () => {
     difficulty.value !== "any" ? `&difficulty=${difficulty.value}` : "";
   time = parseInt(timePerQuestion.value, 10) || 30;
 
-    const url = `https://opentdb.com/api.php?amount=${num}${cat}${diff}&type=multiple`;
+  const url = `https://opentdb.com/api.php?amount=${num}${cat}${diff}&type=multiple`;
 
-    // const url = ("https://opentdb.com/api_category.php");
-    
+  // const url = ("https://opentdb.com/api_category.php");
 
   console.log("Fetching from:", url.category);
 
