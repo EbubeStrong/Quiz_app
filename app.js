@@ -51,18 +51,22 @@ const startBtn = document.querySelector(".start"),
   nextBtn = document.querySelector(".next");
 
 // Start Quiz Function
+// Prevent Reload or Exit
+window.addEventListener("beforeunload", (event) => {
+  event.preventDefault();
+  event.returnValue = "Are you sure you want to leave? Your progress will be lost.";
+});
+
+// Save progress in sessionStorage when quiz starts
 const startQuiz = () => {
   const num = numQuestions.value || 5;
   const cat = category.value !== "any" ? `&category=${category.value}` : "";
-  const diff =
-    difficulty.value !== "any" ? `&difficulty=${difficulty.value}` : "";
+  const diff = difficulty.value !== "any" ? `&difficulty=${difficulty.value}` : "";
   time = parseInt(timePerQuestion.value, 10) || 30;
 
   const url = `https://opentdb.com/api.php?amount=${num}${cat}${diff}&type=multiple`;
 
-  // const url = ("https://opentdb.com/api_category.php");
-
-  console.log("Fetching from:", url.category);
+  console.log("Fetching from:", url);
 
   fetch(url)
     .then((res) => {
@@ -83,6 +87,9 @@ const startQuiz = () => {
       questions = data.results;
       console.log("Fetched Questions:", questions);
 
+      // Save quiz progress to session storage
+      sessionStorage.setItem("quizStarted", "true");
+
       startScreen.classList.add("hide");
       quiz.classList.remove("hide");
 
@@ -95,7 +102,16 @@ const startQuiz = () => {
     });
 };
 
+// Prevent user from going back to the start screen
+document.addEventListener("DOMContentLoaded", () => {
+  if (sessionStorage.getItem("quizStarted") === "true") {
+    startScreen.classList.add("hide");
+    quiz.classList.remove("hide");
+  }
+});
+
 startBtn.addEventListener("click", startQuiz);
+
 
 const showQuestion = (question) => {
   const questionText = document.querySelector(".question"),
