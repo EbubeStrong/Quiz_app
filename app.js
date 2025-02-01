@@ -233,7 +233,16 @@ const showScore = () => {
   totalScore.innerHTML = `/${questions.length}`;
 };
 
-const restartBtn = document.querySelector(".restart");
+const restartBtn = document.querySelector(".restart")
 restartBtn.addEventListener("click", () => {
+  endScore.classList.add("hide");
+  startContainer.classList.add("hide");
+  infoBox.classList.add("hide");
+  selectContainer.classList.remove("hide");
+  startScreen.classList.remove("hide");
+})
+
+const exitQuiz = document.querySelector(".btn.exit")
+exitQuiz.addEventListener("click", () => {
   window.location.reload();
 });
